@@ -1621,14 +1621,14 @@ def plot_simulation_data(filtered_logs, filtered_particle_logs):
         filtered_particle_logs: Filtered particle DataFrame.
     """
     print("\n--- Generating Plots for Filtered Simulations ---")
-    os.makedirs("particle_5_theta_0.5_rand_0.2/filtered_figure", exist_ok=True)
-    plot_trials_to_open_all(filtered_logs, save_dir="particle_5_theta_0.5_rand_0.2/filtered_figure")
-    plot_trials_to_open_all_with_children(filtered_logs, save_dir="particle_5_theta_0.5_rand_0.2/filtered_figure")  # Add the new function
-    plot_repeated_attempts(filtered_logs, save_dir="particle_5_theta_0.5_rand_0.2/filtered_figure")
-    plot_trials_to_open_first_nonred(filtered_logs, save_dir="particle_5_theta_0.5_rand_0.2/filtered_figure")
-    plot_most_likely_hypotheses(filtered_particle_logs, filtered_logs, save_dir="particle_5_theta_0.5_rand_0.2/filtered_figure")
+    os.makedirs("filtered_figure", exist_ok=True)
+    plot_trials_to_open_all(filtered_logs, save_dir="filtered_figure")
+    plot_trials_to_open_all_with_children(filtered_logs, save_dir="filtered_figure")  # Add the new function
+    plot_repeated_attempts(filtered_logs, save_dir="filtered_figure")
+    plot_trials_to_open_first_nonred(filtered_logs, save_dir="filtered_figure")
+    plot_most_likely_hypotheses(filtered_particle_logs, filtered_logs, save_dir="filtered_figure")
     # Pass logs directory as output_dir for saving the CSV file
-    plot_hypothesis_count_over_time(filtered_particle_logs, save_dir="particle_5_theta_0.5_rand_0.2/filtered_figure", output_dir="particle_5_theta_0.5_rand_0.2/logs")
+    plot_hypothesis_count_over_time(filtered_particle_logs, save_dir="filtered_figure", output_dir="logs")
 
 
 def main():
@@ -1655,7 +1655,7 @@ def main():
 
     # Save combined logs to CSV files
     print("\n--- Saving Combined Logs to CSV ---")
-    os.makedirs("particle_5_theta_0.5_rand_0.2/logs", exist_ok=True)
+    os.makedirs("logs", exist_ok=True)
     combined_logs.to_csv("logs/trails_logs.csv", index=False)
     combined_particle_logs.to_csv("logs/particle_logs.csv", index=False)
     combined_candidate_logs.to_csv("logs/candidate_logs.csv", index=False)
@@ -1663,7 +1663,7 @@ def main():
 
     # Plotting Results
     print("\n--- Generating Plots ---")
-    os.makedirs("particle_5_theta_0.5_rand_0.2/figure", exist_ok=True)
+    os.makedirs("figure", exist_ok=True)
     plot_trials_to_open_all(combined_logs)
     plot_trials_to_open_all_with_children(combined_logs)  # New function to overlay with children's data
     plot_repeated_attempts(combined_logs)
@@ -1671,7 +1671,7 @@ def main():
     plot_most_likely_hypotheses(combined_particle_logs, combined_logs)
     plot_ess_trigger_distribution(ess_trigger_counts)
     # Pass logs directory as output_dir for saving the CSV file
-    plot_hypothesis_count_over_time(combined_particle_logs, save_dir="particle_5_theta_0.5_rand_0.2/figure", output_dir="particle_5_theta_0.5_rand_0.2/logs")
+    plot_hypothesis_count_over_time(combined_particle_logs, save_dir="figure", output_dir="logs")
 
     print("\n--- Combined Simulation Results ---")
     print(f"Total trials logged: {len(combined_logs)}")
